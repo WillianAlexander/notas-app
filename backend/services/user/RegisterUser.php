@@ -18,6 +18,7 @@ class RegisterUser
             $data = json_decode(file_get_contents("php://input"), true);
 
             $result = $this->register(
+                $data['nombre'] ?? '',
                 $data['username'] ?? '',
                 $data['email'] ?? '',
                 $data['password'] ?? ''
@@ -38,11 +39,11 @@ class RegisterUser
         }
     }
 
-    private function register($username, $email, $password)
+    private function register($nombre, $username, $email, $password)
     {
         try {
-            if (empty($username) || empty($email) || empty($password)) {
-                throw new Exception("Username, email y password son requeridos");
+            if (empty($nombre) || empty($username) || empty($email) || empty($password)) {
+                throw new Exception("Nombre, username, email y password son requeridos");
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -77,8 +78,9 @@ class RegisterUser
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
             // Insert new user
-            $query = "INSERT INTO " . $this->table_name . " (username, email, password_hash, activo) VALUES (:username, :email, :password, 1)";
+            $query = "INSERT INTO " . $this->table_name . " (nombre, username, email, password_hash, activo) VALUES (:nombre, :username, :email, :password, 1)";
             $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":nombre", $nombre, PDO::PARAM_STR);
             $stmt->bindParam(":username", $username, PDO::PARAM_STR);
             $stmt->bindParam(":email", $email, PDO::PARAM_STR);
             $stmt->bindParam(":password", $hashed_password, PDO::PARAM_STR);
