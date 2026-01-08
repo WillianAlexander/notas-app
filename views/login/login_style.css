@@ -36,7 +36,7 @@ form div label {
   font-size: 0.9rem;
 }
 
-form input {
+.input {
   padding: 0.8rem;
   font-size: 1rem;
   border: 1px solid #ccc;
