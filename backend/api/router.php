@@ -35,14 +35,16 @@ class Router
     public function post($route, $controller, $action)
     {
         if ($this->method === 'POST' && $this->matchRoute($route)) {
-            return $this->callController($controller, $action);
+            $this->callController($controller, $action);
+            exit; // <- Detener ejecución después de manejar la ruta
         }
     }
 
     public function get($route, $controller, $action)
     {
         if ($this->method === 'GET' && $this->matchRoute($route)) {
-            return $this->callController($controller, $action);
+            $this->callController($controller, $action);
+            exit; // <- Detener ejecución después de manejar la ruta
         }
     }
 
