@@ -57,14 +57,16 @@ class Router
     private function callController($controller, $action)
     {
         try {
-            $controllerFile = __DIR__ . "/../services/" . str_replace(['\\','/'], DIRECTORY_SEPARATOR, $controller) . ".php";
-            if (!file_exists($controllerFile)) {
-                throw new Exception("Controller file not found: $controllerFile");
+            $controllerFile = __DIR__ . "/../services/" . $controller . ".php";
+            $controllerFile = realpath($controllerFile); // Limpia ../ y normaliza separadores
+            
+            if (!$controllerFile || !file_exists($controllerFile)) {
+                throw new Exception("Controller file not found: " . $controller);
             }
 
             require_once $controllerFile;
 
-            $className = basename(str_replace('\\', '/', $controller));
+            $className = basename(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $controller));
             if (!class_exists($className)) {
                 throw new Exception("Controller class not found: $className");
             }

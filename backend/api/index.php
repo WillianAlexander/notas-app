@@ -31,10 +31,12 @@ require_once __DIR__ . '/router.php';
 
 $router = new Router();
 
-// Rutas de autenticación
+// Registrar rutas para GET y POST
 $router->post('/register', 'user/RegisterUser', 'handleRegister');
+$router->get('/register', 'user/RegisterUser', 'handleRegister');
+
 $router->post('/login', 'user/LoginUser', 'handleLogin');
-$router->post('/logout', 'user/LoginUser', 'handleLogout');
+$router->get('/login', 'user/LoginUser', 'handleLogin');
 
 // Rutas de notas (próximas)
 // $router->get('/notas', 'note/NoteUser', 'getNotes');
