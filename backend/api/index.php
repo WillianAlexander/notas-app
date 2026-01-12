@@ -10,9 +10,14 @@ header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');   // solo para desarrollo
 
 // -------------------------------------------------
+// Cargar pool de conexiones
+// -------------------------------------------------
+
+require_once __DIR__ . "/../database/conection/pool.php";
+
+// -------------------------------------------------
 // Cargar el router (versión simplificada)
 // -------------------------------------------------
-require_once __DIR__ . "/../database/conection/pool.php";
 require_once __DIR__ . '/router.php';
 
 $router = new Router();
