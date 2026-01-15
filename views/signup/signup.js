@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           console.log(data.message)
           /* sessionStorage.setItem("user_id", data.user.id_usuario) */
-          /* window.location.href = "/notas-app/views/dashboard/login.html" */
+          window.location.href = "/notas-app/views/login/login.html"
         } else {
           console.log("Error: ", data.message)
           /* alert("Error: " + data.message); */
