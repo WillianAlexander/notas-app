@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#notes-list {
+  display: flex;
+  gap: 5px;
+  .note {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+  }
+}
